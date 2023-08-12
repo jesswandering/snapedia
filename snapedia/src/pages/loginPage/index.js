@@ -2,4 +2,7 @@ const LoginPage = () => {
     return <div>LoginPage</div>
 };
 
-export default <oginPage
+export default <LoginPage>
+
+
+</LoginPage>
