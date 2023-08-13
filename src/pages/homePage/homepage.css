@@ -1,0 +1,20 @@
+.homepage-parent-div {
+    display: flex;
+    width: 100vw;
+    justify-content: space-between;
+    background-color: red;
+}
+
+homepage-user-card {
+    background-color: aqua;
+}
+
+homepage-post-feed {
+    background-color: darkgoldenrod;
+}
+
+homepage-friends {
+    background-color: blueviolet;
+    height: 400px;
+    width: 400px;
+}

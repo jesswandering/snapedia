@@ -2,9 +2,11 @@ import { useNavigate } from "react-router-dom";
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const LoginPage = () => {
+const SignupPage = () => {
     const navigate = useNavigate()
     const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
         email: '',
         password: ''
     });
@@ -21,7 +23,7 @@ const LoginPage = () => {
         event.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:3001/auth/login', formData);
+            const response = await axios.post('http://localhost:3001/auth/signup', formData);
             localStorage.setItem("user", JSON.stringify(response.data))
             navigate("/home")
         } catch (error) {
@@ -31,6 +33,20 @@ const LoginPage = () => {
 
     return (
         <form onSubmit={handleSubmit}>
+            <input
+                type="text"
+                name="firstName"
+                placeholder="First Name"
+                value={formData.firstName}
+                onChange={handleChange}
+            />
+            <input
+                type="text"
+                name="lastName"
+                placeholder="Last Name"
+                value={formData.lastName}
+                onChange={handleChange}
+            />
             <input
                 type="email"
                 name="email"
@@ -45,9 +61,9 @@ const LoginPage = () => {
                 value={formData.password}
                 onChange={handleChange}
             />
-            <button type="submit">Login</button>
+            <button type="submit">Submit</button>
         </form>
     );
 }
 
-export default LoginPage;
+export default SignupPage;

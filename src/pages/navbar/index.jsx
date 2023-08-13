@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
     Box,
     IconButton,
@@ -10,7 +9,6 @@ import {
     useMediaQuery,
 } from "@mui/material";
 import {
-    Search,
     Message,
     Notifications,
     Help,
@@ -18,9 +16,12 @@ import {
 import { useNavigate } from "react-router-dom";
 import FlexBetween from "components/FlexBetween";
 
-const Navbar = () => {
+const Navbar = ({ user }) => {
     const navigate = useNavigate();
-    const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
+    const handleLogout = () => {
+        localStorage.clear()
+        navigate("/login")
+    }
 
 
     return (
@@ -40,18 +41,33 @@ const Navbar = () => {
                 >
                     Snapedia
                 </Typography>
-                {isNonMobileScreens && (
-                    <FlexBetween
-                        borderRadius="9px"
-                        gap="3rem"
-                        padding="0.1rem 1.5rem"
-                    >
-                        <InputBase placeholder="Search..." />
-                        <IconButton>
-                            <Search />
-                        </IconButton>
-                    </FlexBetween>
-                )}
+                {user ? <Typography
+                    fontWeight="bold"
+                    fontSize="clamp(1rem, 2rem, 2.25rem)"
+                    color="primary"
+                    onClick={() => handleLogout()}
+                    sx={{
+                        "&:hover": {
+                            color: "red",
+                            cursor: "pointer",
+                        },
+                    }}
+                >
+                    Logout
+                </Typography> : <Typography
+                    fontWeight="bold"
+                    fontSize="clamp(1rem, 2rem, 2.25rem)"
+                    color="primary"
+                    onClick={() => navigate("/login")}
+                    sx={{
+                        "&:hover": {
+                            color: "red",
+                            cursor: "pointer",
+                        },
+                    }}
+                >
+                    Login
+                </Typography>}
             </FlexBetween>
             <Box>
                 {/* CLOSE ICON */}
@@ -89,7 +105,15 @@ const Navbar = () => {
                             <MenuItem >
                                 <Typography></Typography>
                             </MenuItem>
-                            <MenuItem onClick={() => console.log("logout")}>
+                            <MenuItem
+                                sx={{
+                                    color: "yellow",
+                                    "&:hover": {
+                                        color: "red",
+                                        cursor: "pointer",
+                                    },
+                                }}
+                                onClick={() => console.log("logout")}>
                                 Log Out
                             </MenuItem>
                         </Select>
