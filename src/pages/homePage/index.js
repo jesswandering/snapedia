@@ -4,7 +4,6 @@ import Navbar from "pages/navbar";
 import UserWidget from "pages/widgets/UserWidget";
 import MyPostWidget from "pages/widgets/MyPostWidget";
 import PostsWidget from "pages/widgets/PostsWidget";
-import AdvertWidget from "pages/widgets/AdvertWidget";
 import FriendListWidget from "pages/widgets/FriendListWidget";
 
 const HomePage = () => {
@@ -33,8 +32,6 @@ const HomePage = () => {
                 </Box>
                 {isNonMobileScreens && (
                     <Box flexBasis="26%">
-                        <AdvertWidget />
-                        <Box m="2rem 0" />
                         <FriendListWidget userId={_id} />
                     </Box>
                 )}
