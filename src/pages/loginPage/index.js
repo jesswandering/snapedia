@@ -1,53 +1,36 @@
-import { useNavigate } from "react-router-dom";
-import React, { useState } from 'react';
-import axios from 'axios';
+import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
+import Form from "./Form";
 
 const LoginPage = () => {
-    const navigate = useNavigate()
-    const [formData, setFormData] = useState({
-        email: '',
-        password: ''
-    });
-
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setFormData(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-    };
-
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-
-        try {
-            const response = await axios.post('http://localhost:3001/auth/login', formData);
-            localStorage.setItem("user", JSON.stringify(response.data))
-            navigate("/home")
-        } catch (error) {
-            console.error('Error submitting form:', error);
-        }
-    };
-
+    const theme = useTheme();
+    const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
     return (
-        <form onSubmit={handleSubmit}>
-            <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={formData.email}
-                onChange={handleChange}
-            />
-            <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={formData.password}
-                onChange={handleChange}
-            />
-            <button type="submit">Login</button>
-        </form>
+        <Box>
+            <Box
+                width="100%"
+                backgroundColor={theme.palette.background.alt}
+                p="1rem 6%"
+                textAlign="center"
+            >
+                <Typography fontWeight="bold" fontSize="32px" color="primary">
+                    Snapedia
+                </Typography>
+            </Box>
+
+            <Box
+                width={isNonMobileScreens ? "50%" : "93%"}
+                p="2rem"
+                m="2rem auto"
+                borderRadius="1.5rem"
+                backgroundColor={theme.palette.background.alt}
+            >
+                <Typography fontWeight="500" variant="h5" sx={{ mb: "1.5rem" }}>
+                    Welcome to Snapedia
+                </Typography>
+                <Form />
+            </Box>
+        </Box>
     );
-}
+};
 
 export default LoginPage;
