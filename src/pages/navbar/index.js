@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import {
     Search,
-    Message,
+    // Message,
     DarkMode,
     LightMode,
     Notifications,
@@ -83,7 +83,7 @@ const Navbar = () => {
                             <LightMode sx={{ color: dark, fontSize: "25px" }} />
                         )}
                     </IconButton>
-                    <Message sx={{ fontSize: "25px" }} />
+                    {/* <Message sx={{ fontSize: "25px" }} /> */}
                     <Notifications sx={{ fontSize: "25px" }} />
                     {/* <Help sx={{ fontSize: "25px" }} /> */}
                     <FormControl variant="standard" value={fullName}>
@@ -158,8 +158,8 @@ const Navbar = () => {
                                 <LightMode sx={{ color: dark, fontSize: "25px" }} />
                             )}
                         </IconButton>
-                        <Message sx={{ fontSize: "25px" }} />
-                        <Notifications sx={{ fontSize: "25px" }} />
+                        {/* <Message sx={{ fontSize: "25px" }} /> */}
+                        {/* <Notifications sx={{ fontSize: "25px" }} /> */}
                         {/* <Help sx={{ fontSize: "25px" }} /> */}
                         <FormControl variant="standard" value={fullName}>
                             <Select

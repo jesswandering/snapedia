@@ -2,7 +2,6 @@ import {
     ChatBubbleOutlineOutlined,
     FavoriteBorderOutlined,
     FavoriteOutlined,
-    ShareOutlined,
 } from "@mui/icons-material";
 import { Box, Divider, IconButton, Typography, useTheme } from "@mui/material";
 import FlexBetween from "components/FlexBetween";
@@ -43,6 +42,7 @@ const PostWidget = ({
             },
             body: JSON.stringify({ userId: loggedInUserId }),
         });
+        // GIVES UPDATED POST FROM BACKEND
         const updatedPost = await response.json();
         dispatch(setPost({ post: updatedPost }));
     };
@@ -88,14 +88,13 @@ const PostWidget = ({
                     </FlexBetween>
                 </FlexBetween>
 
-                <IconButton>
-                    <ShareOutlined />
-                </IconButton>
+
             </FlexBetween>
             {isComments && (
                 <Box mt="0.5rem">
                     {comments.map((comment, i) => (
                         <Box key={`${name}-${i}`}>
+                            <form></form>
                             <Divider />
                             <Typography sx={{ color: main, m: "0.5rem 0", pl: "1rem" }}>
                                 {comment}
