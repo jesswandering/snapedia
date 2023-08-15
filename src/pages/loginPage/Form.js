@@ -32,18 +32,18 @@ const loginSchema = yup.object().shape({
 });
 
 const initialValuesRegister = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    location: "",
-    occupation: "",
+    firstName: "jess",
+    lastName: "lee",
+    email: "jess@email.com",
+    password: "jess123",
+    location: "Place, CA",
+    occupation: "Person",
     picture: "",
 };
 
 const initialValuesLogin = {
-    email: "",
-    password: "",
+    email: "jess@email.com",
+    password: "jess123",
 };
 
 const Form = () => {
@@ -57,18 +57,17 @@ const Form = () => {
 
     const register = async (values, onSubmitProps) => {
         // this allows us to send form info with image
-        console.log(values)
-        let formData = { ...values, "picturePath": values.picture.name }
+        const formData = new FormData();
+        for (let value in values) {
+            formData.append(value, values[value]);
+        }
+        formData.append("picturePath", values.picture.name);
         console.log(formData)
-
-        let fetchBody = JSON.stringify(formData);
-
         const savedUserResponse = await fetch(
             "http://localhost:3001/auth/register",
             {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: fetchBody,
+                body: formData,
             }
         );
         const savedUser = await savedUserResponse.json();
@@ -80,11 +79,10 @@ const Form = () => {
     };
 
     const login = async (values, onSubmitProps) => {
-        let fetchBody = JSON.stringify(values);
         const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: fetchBody,
+            body: JSON.stringify(values),
         });
         const loggedIn = await loggedInResponse.json();
         onSubmitProps.resetForm();
